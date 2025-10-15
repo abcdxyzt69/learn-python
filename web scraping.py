@@ -2,8 +2,8 @@
 Web Scraping đơn giản - Lấy danh sách công việc Python
 """
 
-from bs4 import BeautifulSoup
-import requests
+from bs4 import BeautifulSoup  # type: ignore
+import requests  # type: ignore
 
 # URL trang web cần scrape
 url = "https://www.python.org/jobs/"
@@ -17,21 +17,21 @@ try:
     response.raise_for_status()
 
     # Bước 2: Parse (phân tích) HTML bằng BeautifulSoup
-    soup = BeautifulSoup(response.text, "html.parser")
+    soup = BeautifulSoup(response.text, "html.parser")  # type: ignore
 
     # Bước 3: Tìm tất cả thẻ h2 có class="listing-company"
-    job_posts = soup.find_all("h2", class_="listing-company")
+    job_posts = soup.find_all("h2", class_="listing-company")  # type: ignore
 
     print(f"✅ Tìm thấy {len(job_posts)} công việc:\n")
 
     # Bước 4: Loop qua từng job post và in ra tên công ty
-    for i, job_post in enumerate(job_posts, 1):
+    for i, job_post in enumerate(job_posts, 1):  # type: ignore
         # Tìm thẻ <a> trong job_post
-        link = job_post.find("a")
+        link = job_post.find("a")  # type: ignore
 
         # Kiểm tra xem có tồn tại không (tránh lỗi)
         if link:
-            company_name = link.text.strip()  # .strip() xóa khoảng trắng thừa
+            company_name = link.text.strip()  # type: ignore  # .strip() xóa khoảng trắng thừa
             print(f"{i}. {company_name}")
         else:
             print(f"{i}. [Không có tên công ty]")
@@ -48,4 +48,4 @@ except requests.exceptions.HTTPError as e:
 except Exception as e:
     print(f"❌ Lỗi không xác định: {e}")
 
-print("\n ✔️Hoàn thành!")
+print("\n Hoàn thành!")
